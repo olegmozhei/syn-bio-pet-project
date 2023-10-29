@@ -15,7 +15,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: |
+        echo "Directory content:"
+        ls
+        echo "Working directory path"
+        pwd
+        docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
