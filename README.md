@@ -1,12 +1,16 @@
-# syn-bio-pet-project
+# Serverless java API
+The project is based on spring api built using AWS API Gateway
+Spring API is using postgres
 
-## Description
-Pet project to automate interesting protocols/scripts  
-Based on:  
-Spring REST API  
-OpenAPI 3.0  
-API path: http://localhost:8080/swagger-ui/index.html
-AWS ECS task
-docker image
+## Building the project locally
+Install local postgres if needed:
+* [Postgres](https://aws.amazon.com/cli/)
 
-amazoncorretto:21.0.1-al2023-headless
+## Deploying to AWS
+mvn package  
+terraform apply --var-file=vars.tfvars  
+*vars.tfvars is added to gitignore for security reasons
+
+Swagger:  
+http://localhost:8080/swagger-ui/index.html
+http://localhost:8080/v3/api-docs
