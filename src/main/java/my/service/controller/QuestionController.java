@@ -18,8 +18,12 @@ public class QuestionController {
         this.questionRepository = questionRepository;
     }
 
-    @Operation(summary = "Add new question. 1 - show answers and select correct; 2 - type in free answer case-sensitive; 3 - type in free answer case-insensitive")
     @CrossOrigin(origins = "*", maxAge = 3600)
+    @Operation(description = """
+             1 - show answers and select correct;
+             2 - type in free answer case-sensitive;
+             3 - type in free answer case-insensitive
+            """)
     @RequestMapping(path = "/question", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public String addNewQuestion(@RequestBody String input) {
         JSONObject inputJson = new JSONObject(input);
