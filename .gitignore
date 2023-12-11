@@ -1,6 +1,11 @@
 HELP.md
 target/
 .mvn/*
+terraform/.terraform/*
+terraform/vars.tfvars
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+.aws-sam/*
 
 ### STS ###
 .apt_generated
