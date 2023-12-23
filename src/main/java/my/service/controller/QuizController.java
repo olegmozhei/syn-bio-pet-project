@@ -55,10 +55,11 @@ public class QuizController {
 
     @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping(path = "/question/start_new_quiz", method = RequestMethod.POST, produces = "application/json")
-    public String startNewQuiz(@RequestParam("Number of questions") int number) {
+    public String startNewQuiz(@RequestParam("Number of questions") int number,
+                               @RequestParam(value = "Topic", required = false) String topic) {
 
         // prepare list of questions suitable for testing
-        Iterable<Question> questions = questionRepository.findAll();
+        Iterable<Question> questions = (topic == null) ? questionRepository.findAll() : questionRepository.findByTopic(topic);
         List<Question> allQuestions = new ArrayList<>();
         questions.forEach(allQuestions::add);
         Collections.shuffle(allQuestions);

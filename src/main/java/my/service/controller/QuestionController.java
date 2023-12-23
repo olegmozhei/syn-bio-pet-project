@@ -3,11 +3,9 @@ package my.service.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import my.service.database.implementations.IQuestionRepository;
 import my.service.database.implementations.Question;
-import my.service.database.implementations.QuizToQuestions;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import static my.service.utils.Utils.validateJson;
 
 @RestController
 public class QuestionController {
@@ -20,22 +18,21 @@ public class QuestionController {
 
     @CrossOrigin(origins = "*", maxAge = 3600)
     @Operation(description = """
-             1 - show answers and select correct;
-             2 - type in free answer case-sensitive;
-             3 - type in free answer case-insensitive
+             1 - show answers and select correct;\n
+             2 - type in free answer case-sensitive;\n
+             3 - type in free answer case-insensitive;\n
+             4 - type in formula (similar to type 2);
             """)
-    @RequestMapping(path = "/question", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public String addNewQuestion(@RequestBody String input) {
-        JSONObject inputJson = new JSONObject(input);
-        validateJson(inputJson, new String[] {"type", "task", "answer1"});
+    @RequestMapping(path = "/question", method = RequestMethod.POST, produces = "application/json")
+    public String addNewQuestion(@RequestParam("Question type") int type,
+                                 @RequestParam("Task") String task,
+                                 @RequestParam("Answer1") String answer1,
+                                 @RequestParam(value = "Answer2", required = false) String answer2,
+                                 @RequestParam(value = "Answer3", required = false) String answer3,
+                                 @RequestParam(value = "Answer4", required = false) String answer4,
+                                 @RequestParam(value = "Topic", required = false) String topic) {
 
-        Question q = new Question(inputJson.getInt("type"),
-                inputJson.getString("task"),
-                inputJson.getString("answer1"),
-                (inputJson.has("answer2")?inputJson.getString("answer2") : null),
-                (inputJson.has("answer3")?inputJson.getString("answer3") : null),
-                (inputJson.has("answer4")?inputJson.getString("answer4") : null));
-
+        Question q = new Question(type, task, answer1, answer2, answer3,answer4, topic);
 
         questionRepository.save(q);
         JSONObject result = new JSONObject();

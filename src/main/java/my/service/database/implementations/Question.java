@@ -19,6 +19,7 @@ public class Question {
     1 - show answers and select correct
     2 - type in free answer case-sensitive
     3 - type in free answer case-insensitive
+    4 - latex formula (similar to free answer case-sensitive)
      */
     @Column
     private int type;
@@ -39,24 +40,27 @@ public class Question {
     private String answer4;
 
     @Column
+    private String topic;
+    @Column
     private int complexity;
 
     public Question(){
 
     }
 
-    public Question(int type, String task, String answer1, String answer2, String answer3, String answer4){
+    public Question(int type, String task, String answer1, String answer2, String answer3, String answer4, String topic){
         this.type = type;
         this.task = task;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
+        this.topic = topic;
     }
 
     public String checkAnswer(String answer){
         if (type == 1 && answer.equals(answer1)) return "correct";
-        if (type == 2 && getListOfAnswers().stream().anyMatch(e-> e.equals(answer))) return "correct";
+        if (type == 2 || type == 4 && getListOfAnswers().stream().anyMatch(e-> e.equals(answer))) return "correct";
         if (type == 3 && getListOfAnswers().stream().anyMatch(e-> e.equalsIgnoreCase(answer))) return "correct";
         return "error. Correct answer is '" + answer1 + "'";
     }
@@ -81,6 +85,10 @@ public class Question {
                 answersArray.put(answer);
             }
             result.put("answers", answersArray);
+        }
+        result.put("type", type);
+        if (topic != null){
+            result.put("topic", topic);
         }
         return result;
     }
