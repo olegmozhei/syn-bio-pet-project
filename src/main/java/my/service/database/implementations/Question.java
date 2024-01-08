@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 @Entity
 @Table(name="questions", schema = "quiz")
@@ -41,14 +42,22 @@ public class Question {
 
     @Column
     private String topic;
+
+    @Column
+    private String image;
+
     @Column
     private int complexity;
+
+    @Column(name = "last_correct_answer")
+    @Temporal(TemporalType.TIMESTAMP)
+    Date lastCorrectAnswer;
 
     public Question(){
 
     }
 
-    public Question(int type, String task, String answer1, String answer2, String answer3, String answer4, String topic){
+    public Question(int type, String task, String answer1, String answer2, String answer3, String answer4, String topic, String image){
         this.type = type;
         this.task = task;
         this.answer1 = answer1;
@@ -56,6 +65,7 @@ public class Question {
         this.answer3 = answer3;
         this.answer4 = answer4;
         this.topic = topic;
+        this.image = image;
     }
 
     public String checkAnswer(String answer){
@@ -87,9 +97,8 @@ public class Question {
             result.put("answers", answersArray);
         }
         result.put("type", type);
-        if (topic != null){
-            result.put("topic", topic);
-        }
+        if (topic != null) result.put("topic", topic);
+        if (image != null) result.put("image", image);
         return result;
     }
 }

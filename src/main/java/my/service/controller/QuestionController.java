@@ -30,9 +30,10 @@ public class QuestionController {
                                  @RequestParam(value = "Answer2", required = false) String answer2,
                                  @RequestParam(value = "Answer3", required = false) String answer3,
                                  @RequestParam(value = "Answer4", required = false) String answer4,
-                                 @RequestParam(value = "Topic", required = false) String topic) {
+                                 @RequestParam(value = "Topic", required = false) String topic,
+                                 @RequestParam(value = "Image", required = false) String image) {
 
-        Question q = new Question(type, task, answer1, answer2, answer3,answer4, topic);
+        Question q = new Question(type, task, answer1, answer2, answer3,answer4, topic, image);
 
         questionRepository.save(q);
         JSONObject result = new JSONObject();
