@@ -1,4 +1,4 @@
-package my.service.database.implementations;
+package my.service.quiz.entities;
 
 import jakarta.persistence.*;
 
@@ -7,34 +7,37 @@ import jakarta.persistence.*;
 public
 class QuizToQuestions implements Comparable<QuizToQuestions>{
 
-    @EmbeddedId
-    public QuizToQuestionKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "relation_id")
+    private int id;
 
     @ManyToOne
-    @MapsId("quizId")
     @JoinColumn(name = "quiz_id")
     Quiz quiz;
 
     @ManyToOne
-    @MapsId("questionId")
     @JoinColumn(name = "question_id")
-    public Question question;
+    public OrdinaryQuestion question;
+
+    @Column(name = "question_order")
+    public int questionOrder;
 
     // standard constructors, getters, and setters
-    public QuizToQuestions(Quiz quiz, Question question, int order){
+    public QuizToQuestions(Quiz quiz, OrdinaryQuestion question, int order){
         this.question = question;
         this.quiz = quiz;
-        this.id = new QuizToQuestionKey(quiz.id, question.id, order);
+        this.questionOrder = order;
     }
 
     public QuizToQuestions(){}
 
     public int getOrder(){
-        return id.questionsOrder;
+        return questionOrder;
     }
 
     @Override
     public int compareTo(QuizToQuestions o) {
-        return this.id.questionsOrder - o.id.questionsOrder;
+        return this.questionOrder - o.questionOrder;
     }
 }

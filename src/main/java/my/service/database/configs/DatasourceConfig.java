@@ -37,7 +37,7 @@ public class DatasourceConfig {
         LocalContainerEntityManagerFactoryBean lemfb = new LocalContainerEntityManagerFactoryBean();
         lemfb.setDataSource(dataSource.getDataSource());
         lemfb.setJpaVendorAdapter(jpaVendorAdapter());
-        lemfb.setPackagesToScan("my.service.database");
+        lemfb.setPackagesToScan("my.service");
         return lemfb;
     }
 }
