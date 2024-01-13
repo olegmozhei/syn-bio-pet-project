@@ -82,7 +82,7 @@ public class QuizController {
         quizToQuestionRepository.saveAll(quiz.relations);
 
         //quiz = quizRepository.findByUUID(quiz.uuid);
-        quiz = quizRepository.findById(quiz.id).get();
+        quiz = quizRepository.findById(quiz.quizId).get();
 
 
         // return first question and quiz instance information

@@ -13,7 +13,8 @@ public class Quiz {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public int id;
+    @Column(name = "quiz_id")
+    public int quizId;
 
     @OneToMany(mappedBy = "quiz")
     public Set<QuizToQuestions> relations;
