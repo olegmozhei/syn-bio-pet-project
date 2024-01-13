@@ -14,6 +14,7 @@ public class OrdinaryQuestion {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="question_id")
     public int id;
 
     /*
