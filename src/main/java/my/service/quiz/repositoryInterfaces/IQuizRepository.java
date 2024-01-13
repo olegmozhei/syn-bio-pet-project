@@ -1,5 +1,6 @@
-package my.service.database.implementations;
+package my.service.quiz.repositoryInterfaces;
 
+import my.service.quiz.entities.Quiz;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

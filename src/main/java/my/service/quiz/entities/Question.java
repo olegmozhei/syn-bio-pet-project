@@ -1,16 +1,16 @@
-package my.service.database.implementations;
+package my.service.quiz.entities;
 
 import jakarta.persistence.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 
 @Entity
-@Table(name="questions", schema = "quiz")
-public class Question {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Question {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -47,11 +47,11 @@ public class Question {
     private String image;
 
     @Column
-    private int complexity;
+    public int complexity;
 
     @Column(name = "last_correct_answer")
     @Temporal(TemporalType.TIMESTAMP)
-    Date lastCorrectAnswer;
+    public LocalDateTime lastCorrectAnswer;
 
     public Question(){
 
