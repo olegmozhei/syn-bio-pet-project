@@ -30,11 +30,8 @@ public class Quiz {
         this.uuid = UUID.randomUUID().toString();
     }
 
-    public void updateQuestions(List<OrdinaryQuestion> newQuestions){
-        relations = new HashSet<>();
-        for (int i = 1; i <= newQuestions.size(); i++) {
-            relations.add(new QuizToQuestions(this, newQuestions.get(i - 1), i));
-        }
+    public void updateQuestions(HashSet<QuizToQuestions> relations){
+        this.relations = relations;
     }
 
     public List<OrdinaryQuestion> getQuestions(){
