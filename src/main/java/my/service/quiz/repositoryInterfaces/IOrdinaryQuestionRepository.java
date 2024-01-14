@@ -1,7 +1,6 @@
 package my.service.quiz.repositoryInterfaces;
 
 import my.service.quiz.entities.OrdinaryQuestion;
-import my.service.quiz.entities.Question;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -13,7 +12,7 @@ public interface IOrdinaryQuestionRepository extends CrudRepository<OrdinaryQues
 
     @Query(value = "select * from quiz.questions q order by random() limit 1",
             nativeQuery = true)
-    Question getRandonQuestion();
+    OrdinaryQuestion getRandomQuestion();
 
     List<OrdinaryQuestion> findByTopic(String topic);
 }
