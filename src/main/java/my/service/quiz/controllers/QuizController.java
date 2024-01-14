@@ -45,15 +45,6 @@ public class QuizController {
         return result.toString();
     }
 
-
-    @CrossOrigin(origins = "*", maxAge = 3600)
-    @RequestMapping(path = "/question/get_random", method = RequestMethod.GET, produces = "application/json")
-    public String getRandomQuestion() {
-        Question question = questionRepository.getRandonQuestion();
-        JSONObject result = question.toJson();
-        return result.toString();
-    }
-
     @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping(path = "/quiz/{uuid}/question/{number}", method = RequestMethod.GET, produces = "application/json")
     public String getQuestion(@PathVariable String uuid, @PathVariable int number) {
