@@ -25,6 +25,7 @@ public class OrdinaryQuestion extends Question {
 
     public OrdinaryQuestion(QuestionType type, String task, String answer1, String answer2, String answer3, String answer4, String topic, String image, Integer number){
         super(type, task, answer1, answer2, answer3, answer4, topic, image);
+        classNumber = number;
     }
 
     public OrdinaryQuestion(){
